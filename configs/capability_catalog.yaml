@@ -1,0 +1,90 @@
+# VirtueConnect — Capability Catalog
+# Canonical list of capabilities tracked by the system.
+# Organised by domain category.
+
+categories:
+  maternity:
+    description: "Maternal and obstetric care capabilities"
+    capabilities:
+      - name: c_section
+        description: "Ability to perform caesarean section surgery"
+        synonyms: ["caesarean", "cesarean", "c-section", "cs delivery"]
+        requires_for_safety: ["operating_room", "anesthesia|anesthetist"]
+
+      - name: delivery_natural
+        description: "Ability to assist normal/natural vaginal delivery"
+        synonyms: ["natural delivery", "vaginal delivery", "labour ward", "maternity services"]
+
+      - name: ultrasound_ob
+        description: "Obstetric ultrasound capability"
+        synonyms: ["USG", "sonography", "sonogram", "scan", "eco", "ultrasound scan"]
+
+      - name: incubator
+        description: "Neonatal incubator available"
+        synonyms: ["neonatal incubator", "NICU", "neonatal intensive care"]
+
+      - name: blood_bank
+        description: "On-site blood bank or reliable blood supply"
+        synonyms: ["blood bank", "blood transfusion", "blood supply"]
+        false_indicators: ["donors required", "family replacement", "no blood", "no stocks"]
+
+      - name: anesthesia
+        description: "Anesthesia capability/equipment"
+        synonyms: ["anaesthesia", "anesthetic", "anaesthetic"]
+
+      - name: anesthetist
+        description: "Trained anesthetist on staff"
+        synonyms: ["anaesthetist", "anesthesiologist", "CRNA", "nurse anesthetist"]
+
+      - name: operating_room
+        description: "Major operating theatre / surgical suite"
+        synonyms: ["operating theatre", "major theatre", "surgical suite"]
+        differentiation:
+          - "minor theatre does NOT qualify as operating_room"
+          - "Only 'major theatre', 'operative theatre', 'ultra-modern theatre' qualify"
+
+  trauma:
+    description: "Trauma and surgical capabilities"
+    capabilities:
+      - name: trauma_surgery
+        description: "Can perform trauma/emergency surgical procedures"
+        synonyms: ["trauma surgery", "trauma care", "emergency surgery"]
+
+      - name: general_surgery
+        description: "General surgical capability"
+        synonyms: ["general surgery", "surgical procedures", "surgery department"]
+
+      - name: xray
+        description: "X-ray imaging available"
+        synonyms: ["x-ray", "radiography", "diagnostic imaging", "radiology"]
+
+      - name: ambulance
+        description: "Ambulance or emergency transport"
+        synonyms: ["ambulance", "emergency transport", "patient transport"]
+
+      - name: emergency_24_7
+        description: "24/7 emergency services"
+        synonyms: ["24/7", "24 hours", "always open", "round the clock"]
+
+  infrastructure:
+    description: "Core infrastructure indicators"
+    capabilities:
+      - name: oxygen_supply
+        description: "Reliable medical oxygen supply"
+        synonyms: ["oxygen", "medical oxygen", "oxygen concentrator"]
+
+      - name: generator_backup
+        description: "Backup generator for power outages"
+        synonyms: ["generator", "backup generator", "standby generator"]
+
+      - name: water_supply
+        description: "Reliable clean water supply"
+        synonyms: ["water supply", "clean water", "borehole", "running water"]
+
+      - name: lab_basic
+        description: "Basic laboratory / diagnostics on site"
+        synonyms: ["laboratory", "lab", "laboratory services", "diagnostic lab"]
+
+      - name: pharmacy
+        description: "On-site pharmacy / dispensary"
+        synonyms: ["pharmacy", "dispensary", "pharmacy services", "drug dispensing"]

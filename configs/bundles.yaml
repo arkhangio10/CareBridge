@@ -1,0 +1,65 @@
+# VirtueConnect — Clinical Bundle Definitions
+# Each bundle encodes a clinical safety rule.
+# The validator checks that facilities claiming a primary capability
+# also have the required supporting capabilities.
+
+bundles:
+  c_section_safe:
+    trigger_capability: "c_section"
+    requires_all:
+      - "c_section"
+      - "operating_room"
+    requires_any:
+      - ["anesthesia", "anesthetist"]
+    failure_flag: "ANOMALY_HIGH"
+    failure_reason: "Unsafe C-Section Claim: facility claims C-section but lacks operating room or anesthesia capability"
+
+  trauma_bundle:
+    trigger_capability: "trauma_surgery"
+    requires_all:
+      - "trauma_surgery"
+      - "xray"
+      - "blood_bank"
+    requires_any: []
+    failure_flag: "RISK_HIGH"
+    failure_reason: "Trauma Center without Blood Bank or X-ray"
+
+  safe_delivery:
+    trigger_capability: "delivery_natural"
+    requires_all:
+      - "delivery_natural"
+    requires_any:
+      - ["lab_basic", "pharmacy"]
+    failure_flag: "RISK_MEDIUM"
+    failure_reason: "Delivery facility without basic lab or pharmacy support"
+
+  surgery_safe:
+    trigger_capability: "general_surgery"
+    requires_all:
+      - "general_surgery"
+      - "operating_room"
+    requires_any:
+      - ["anesthesia", "anesthetist"]
+    failure_flag: "ANOMALY_HIGH"
+    failure_reason: "Surgery claimed but no operating room or anesthesia"
+
+  emergency_readiness:
+    trigger_capability: "emergency_24_7"
+    requires_all:
+      - "emergency_24_7"
+    requires_any:
+      - ["lab_basic", "pharmacy"]
+    failure_flag: "RISK_MEDIUM"
+    failure_reason: "24/7 Emergency without lab or pharmacy"
+
+# Text-trigger bundles (handled by the reconciler, not the bundle validator)
+  referral_only:
+    trigger_text:
+      - "refer"
+      - "transfer"
+      - "send to"
+      - "redirect"
+    action: "force_false_contradicted"
+    scope: "concept_specific"
+    failure_flag: "REFERRAL_DETECTED"
+    failure_reason: "Facility refers/transfers this service — capability set to FALSE"
