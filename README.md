@@ -1,6 +1,6 @@
-# VirtueConnect — The Forensic Truth Layer for Healthcare
+# CareBridge — The Forensic Truth Layer for Healthcare
 
-VirtueConnect transforms unstructured medical facility reports into an **evidence-backed forensic truth layer** for NGOs. Built for the Virtue Foundation hackathon, it targets healthcare facilities across Ghana.
+CareBridge transforms unstructured medical facility reports into an **evidence-backed forensic truth layer** for NGOs. Built for the Virtue Foundation hackathon, it targets healthcare facilities across Ghana.
 
 ## Key Features
 

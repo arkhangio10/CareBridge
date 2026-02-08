@@ -1,0 +1,51 @@
+# render.yaml — CareBridge deployment config for Render
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Sonia API (Express backend)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - type: web
+    name: carebridge-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install
+    startCommand: npx tsx server/sonia-api.ts
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SONIA_PORT
+        value: "10000"
+      - key: GEMINI_API_KEY
+        sync: false  # Set manually in Render dashboard
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: ELEVENLABS_VOICE_ID
+        value: "21m00Tcm4TlvDq8ikWAM"
+    healthCheckPath: /health
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Frontend (React static site)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - type: web
+    name: carebridge-frontend
+    runtime: static
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_SONIA_API_URL
+        fromService:
+          type: web
+          name: carebridge-api
+          property: host
+      - key: VITE_GOOGLE_MAPS_API_KEY
+        sync: false  # Set manually
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
