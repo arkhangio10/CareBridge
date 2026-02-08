@@ -1,0 +1,12 @@
+{
+  "name": "carebridge",
+  "private": true,
+  "description": "CareBridge API + Frontend — use frontend/ for deploy",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build:api": "cd frontend && npm install",
+    "start:api": "cd frontend && npx tsx server/sonia-api.ts"
+  }
+}

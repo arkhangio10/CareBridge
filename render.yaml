@@ -10,9 +10,9 @@ services:
     runtime: node
     region: oregon
     plan: free
-    rootDir: frontend
-    buildCommand: npm install
-    startCommand: npx tsx server/sonia-api.ts
+    # No rootDir: build from repo root so submodule can be cloned first
+    buildCommand: git submodule update --init --recursive && cd frontend && npm install
+    startCommand: cd frontend && npx tsx server/sonia-api.ts
     envVars:
       - key: NODE_ENV
         value: production
